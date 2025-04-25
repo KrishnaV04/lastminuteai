@@ -6,6 +6,11 @@ import uuid
 from langchain_openai import ChatOpenAI
 from langchain.schema import HumanMessage, AIMessage
 
+if os.name == 'posix':
+    __import__('pysqlite3')
+    import sys
+    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 from rag_methods import (
     load_doc_to_db, 
     load_url_to_db,
